@@ -9,13 +9,13 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 <div>
-    <Upload BeforeUpload="beforeUpload">
-        <Button Icon="Upload">
-            <span>Lataa tiedosto</span>
-        </Button>
-    </Upload>
+    <InputFile OnChange="OnInputFileChange" id="input-file"/>
 </div>
 
+<div>
+    <h3>@fileName</h3>
+    <p>@fileContent</p>
+</div>
 
 @code {
     private int currentCount = 0;
@@ -25,12 +25,15 @@
         currentCount++;
     }
 
-    bool beforeUpload(UploadFileItem item)
-    {
-        Console.WriteLine($"Filename: {item.FileName}");
-        Console.WriteLine($"ObjectURL: {item.ObjectURL}");
-        _message.Info($"beforeUpload: {item.ObjectURL}");
-        return false;
-    }
+    private string fileName { get; set; } = "";
+    private string fileContent { get; set; } = "";
 
+    private async Task OnInputFileChange(InputFileChangeEventArgs eventArgs)
+    {
+        fileName = eventArgs.File.Name;
+        Console.WriteLine($"Got input file: {eventArgs.File.Name}");
+        using var reader = new StreamReader(eventArgs.File.OpenReadStream());
+        fileContent = await reader.ReadToEndAsync();
+        StateHasChanged();
+    }
 }
