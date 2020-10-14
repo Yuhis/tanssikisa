@@ -1,10 +1,21 @@
 ﻿@page "/counter"
+@using System.IO
+@inject MessageService _message
 
 <h1>Counter</h1>
 
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<div>
+    <Upload BeforeUpload="beforeUpload">
+        <Button Icon="Upload">
+            <span>Lataa tiedosto</span>
+        </Button>
+    </Upload>
+</div>
+
 
 @code {
     private int currentCount = 0;
@@ -13,4 +24,13 @@
     {
         currentCount++;
     }
+
+    bool beforeUpload(UploadFileItem item)
+    {
+        Console.WriteLine($"Filename: {item.FileName}");
+        Console.WriteLine($"ObjectURL: {item.ObjectURL}");
+        _message.Info($"beforeUpload: {item.ObjectURL}");
+        return false;
+    }
+
 }
