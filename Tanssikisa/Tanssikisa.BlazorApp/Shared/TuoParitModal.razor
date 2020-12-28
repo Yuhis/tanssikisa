@@ -1,0 +1,47 @@
+﻿@using System.IO
+
+<Button Type="button" OnClick="@(()=>{ _visible = true; })">
+    Tuo parit
+</Button>
+@{ 
+    RenderFragment footer = @<Template>
+      <Button OnClick="@HandleCancel" @key="@( "back" )">
+          Cancel
+      </Button>
+    </Template>;
+}
+
+<Modal Title="@title"
+       Visible="@_visible"
+       OnCancel="@HandleCancel"
+       Footer="@footer">
+    <InputFile OnChange="OnInputFileChange" id="input-file" />
+    <p>Some contents...</p>
+</Modal>
+
+@code{
+    [Parameter] public EventCallback OnReady { get; set; }
+
+    private string title = "Tuo parit tiedostosta";
+    private bool _visible = false;
+
+    public string fileName { get; set; } = "";
+    public bool contentReady = true;
+    private string fileContent { get; set; } = "";
+
+    
+    private void HandleCancel()
+    {
+        _visible = false;
+    }
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs eventArgs)
+    {
+        fileName = eventArgs.File.Name;
+        //Console.WriteLine($"Got input file: {eventArgs.File.Name}");
+        using var reader = new StreamReader(eventArgs.File.OpenReadStream());
+        fileContent = await reader.ReadToEndAsync();
+        _visible = false;
+        await OnReady.InvokeAsync();
+    }
+}

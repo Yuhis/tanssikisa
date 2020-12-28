@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tanssikisa.BlazorApp", "Tanssikisa.BlazorApp\Tanssikisa.BlazorApp.csproj", "{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tanssikisa.BlazorApp", "Tanssikisa.BlazorApp\Tanssikisa.BlazorApp.csproj", "{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tanssikisa.DTO", "Tanssikisa.DTO\Tanssikisa.DTO.csproj", "{635C4234-D690-4063-9CF9-0D2A344A7FB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.DanceCore", "Integration.DanceCore\Integration.DanceCore.csproj", "{FD4DB819-741F-4868-BD8E-5C5DEB226BED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.DanceCore.Test", "Integration.DanceCore.Test\Integration.DanceCore.Test.csproj", "{277AEC8A-E298-44FD-BB90-A4511183B00B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635C4234-D690-4063-9CF9-0D2A344A7FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635C4234-D690-4063-9CF9-0D2A344A7FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635C4234-D690-4063-9CF9-0D2A344A7FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635C4234-D690-4063-9CF9-0D2A344A7FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4DB819-741F-4868-BD8E-5C5DEB226BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4DB819-741F-4868-BD8E-5C5DEB226BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4DB819-741F-4868-BD8E-5C5DEB226BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4DB819-741F-4868-BD8E-5C5DEB226BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
