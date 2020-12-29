@@ -1,0 +1,53 @@
+﻿@page "/dancecore/tuo/ilmoittautumiset"
+@using System.IO
+@using Integration.DanceCore
+@using Microsoft.Extensions.Logging
+
+<h3>TuoVakLatIlmoittautumiset</h3>
+
+<div>
+    <p>Valitse DanceCore tiedosto</p>
+    <InputFile OnChange="OnInputFileChange" />
+</div>
+
+<AntList Bordered DataSource="@ilmoittautumiset">
+    <Header>Tiedosto: @fileName</Header>
+    <ChildContent Context="item">
+        <ListItem>
+            @item
+        </ListItem>
+    </ChildContent>
+
+    <Footer>Pareja: @ilmoittautumiset.Count</Footer>
+</AntList>
+
+@code {
+    [Inject]
+    protected ILogger<TuoVakLatIlmoittautumiset> logger { get; set; }
+
+    public string fileName { get; set; } = "";
+    //private string fileContent { get; set; } = "";
+    private List<VakLatIlmoittautuminen> ilmoittautumiset = new List<VakLatIlmoittautuminen>();
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs eventArgs)
+    {
+        fileName = eventArgs.File.Name;
+        Console.WriteLine($"Got input file: {eventArgs.File.Name}");
+        //using var reader = new StreamReader(eventArgs.File.OpenReadStream());
+        //fileContent = await reader.ReadToEndAsync();
+
+        using var sr = new StreamReader(eventArgs.File.OpenReadStream());
+        using var ms = new MemoryStream();
+        await sr.BaseStream.CopyToAsync(ms);
+
+        var reader = new VakLatIlmoittautumisetReader(new MicrosoftLoggingAdapter(logger));
+        reader.ReadRegisteredCouples(ms);
+        foreach (var i in reader.DanceCoreIlmoittautumiset)
+        {
+            var ilm = new VakLatIlmoittautuminen();
+            ilm.pari = $"{i.EtunimiM} {i.SukunimiM} - {i.EtunimiN} {i.SukunimiN}";
+            ilmoittautumiset.Add(ilm);
+        }
+        StateHasChanged();
+    }
+}
