@@ -10,16 +10,9 @@
     <InputFile OnChange="OnInputFileChange" />
 </div>
 
-<AntList Bordered DataSource="@ilmoittautumiset">
-    <Header>Tiedosto: @fileName</Header>
-    <ChildContent Context="item">
-        <ListItem>
-            @item
-        </ListItem>
-    </ChildContent>
-
-    <Footer>Pareja: @ilmoittautumiset.Count</Footer>
-</AntList>
+<Table TItem="VakLatIlmoittautuminen" DataSource="@ilmoittautumiset">
+    <Column @bind-Field="@context.pari"></Column>
+</Table>
 
 @code {
     [Inject]
@@ -27,7 +20,8 @@
 
     public string fileName { get; set; } = "";
     //private string fileContent { get; set; } = "";
-    private List<VakLatIlmoittautuminen> ilmoittautumiset = new List<VakLatIlmoittautuminen>();
+
+    private VakLatIlmoittautuminen[] ilmoittautumiset;
 
     private async Task OnInputFileChange(InputFileChangeEventArgs eventArgs)
     {
@@ -42,11 +36,15 @@
 
         var reader = new VakLatIlmoittautumisetReader(new MicrosoftLoggingAdapter(logger));
         reader.ReadRegisteredCouples(ms);
+
+        ilmoittautumiset = new VakLatIlmoittautuminen[reader.DanceCoreIlmoittautumiset.Count];
+        int idx = 0;
         foreach (var i in reader.DanceCoreIlmoittautumiset)
         {
             var ilm = new VakLatIlmoittautuminen();
             ilm.pari = $"{i.EtunimiM} {i.SukunimiM} - {i.EtunimiN} {i.SukunimiN}";
-            ilmoittautumiset.Add(ilm);
+            ilmoittautumiset[idx] = ilm;
+            idx++;
         }
         StateHasChanged();
     }
