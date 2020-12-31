@@ -12,7 +12,7 @@ namespace Integration.DanceCore
     {
         public DanceCoreProfile()
         {
-            CreateMap<VakLatKilpailuIlmoittautuminenDTO, DanceCoreVakLatIlmoittautuminen>()
+            CreateMap<VakLatKilpailuOsallistuminenDTO, DanceCoreVakLatIlmoittautuminen>()
                 .ForMember(dest => dest.ID,
                     opts => opts.MapFrom(
                         src => src.VakLatPari.ParitanssiPariId))

@@ -55,7 +55,7 @@ namespace Integration.DanceCore.Test
 
             // --- Act --------------------------------------------------------
 
-            var dto = Mapper.Map<DanceCoreVakLatIlmoittautuminen, VakLatKilpailuIlmoittautuminenDTO>(dancecore);
+            var dto = Mapper.Map<DanceCoreVakLatIlmoittautuminen, VakLatKilpailuOsallistuminenDTO>(dancecore);
 
             // --- Assert -----------------------------------------------------
 
