@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using FluentValidation.Results;
 
 namespace Integration.DanceCore
 {
     public class DanceCoreVakLatIlmoittautuminen
     {
+        public int RowNumber { get; set; } = 0;
         public string ID { get; set; } = "";
         public string MID { get; set; } = "";
         public string NID { get; set; } = "";
@@ -21,7 +21,7 @@ namespace Integration.DanceCore
         public string Maksettu { get; set; } = "";
         public string Ilmoittautunut { get; set; } = "";
 
-        public List<ValidationFailure> ValidationFailures { get; set; } = new List<ValidationFailure>();
+        public Dictionary<string, List<string>> ValidationErrors { get; set; } = new Dictionary<string, List<string>>();
 
 
         public bool IsHeaderRow => string.Equals("ID", ID) && string.Equals("MID", MID) && string.Equals("NID", NID) &&

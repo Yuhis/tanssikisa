@@ -52,7 +52,7 @@ namespace Integration.DanceCore
                     opts => opts.Ignore())
                 .ForMember(dest => dest.Ilmoittautunut,
                     opts => opts.Ignore())
-                .ForMember( dest => dest.ValidationFailures,
+                .ForMember( dest => dest.ValidationErrors,
                     opts => opts.Ignore())
                 .ReverseMap()
                     .ForMember(dest => dest.VakLatKilpailu,

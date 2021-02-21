@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using FluentValidation.Results;
+using System.Linq;
 
 namespace Integration.DanceCore
 {
@@ -47,6 +48,7 @@ namespace Integration.DanceCore
                     rowNumber++;
                     var row = new DanceCoreVakLatIlmoittautuminen
                     {
+                        RowNumber = rowNumber,
                         ID = reader.GetValue(0)?.ToString()?.Trim(),
                         MID = reader.GetValue(1)?.ToString()?.Trim(),
                         NID = reader.GetValue(2)?.ToString()?.Trim(),
@@ -69,7 +71,11 @@ namespace Integration.DanceCore
                     ValidationResult result = _validator.Validate(row);
                     foreach (var error in result.Errors)
                     {
-                        row.ValidationFailures.Add(error);
+                        List<string> errorMessages = row.ValidationErrors.Where(p => p.Key == error.PropertyName)
+                            .Select(p => p.Value)
+                            .DefaultIfEmpty(new List<string>()).First();
+                        errorMessages.Add(error.ErrorMessage);
+                        row.ValidationErrors[error.PropertyName] = errorMessages;
                         _logger.Log(new LogEntry(LoggingEventType.Warning, $"Failed to validate property {error.PropertyName} on row {rowNumber}: {error.ErrorMessage}."));
                     }
                     DanceCoreIlmoittautumiset.Add(row);
