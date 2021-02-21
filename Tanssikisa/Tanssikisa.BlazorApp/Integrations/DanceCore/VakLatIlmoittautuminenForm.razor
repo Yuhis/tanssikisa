@@ -1,0 +1,34 @@
+﻿@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+
+<Form TModel="VakLatIlmoittautuminen" Model="@model"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      LabelColSpan="8"
+      WrapperColSpan="16">
+    <FormItem Label="Luokka">
+        <Input @bind-Value="@context.Luokka" />
+    </FormItem>
+    <FormItem Label="Sarja">
+        <InputPassword @bind-Value="@context.Sarja" />
+    </FormItem>
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+
+@code {
+    private VakLatIlmoittautuminen model = new VakLatIlmoittautuminen();
+
+    private void OnFinish(EditContext editContext)
+    {
+        Console.WriteLine($"Success:{JsonSerializer.Serialize(model)}");
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine($"Failed:{JsonSerializer.Serialize(model)}");
+    }
+}

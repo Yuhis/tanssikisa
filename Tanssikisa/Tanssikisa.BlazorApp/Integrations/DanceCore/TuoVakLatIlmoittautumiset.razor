@@ -1,51 +1,28 @@
 ﻿@page "/dancecore/tuo/ilmoittautumiset"
-@using System.IO
-@using Integration.DanceCore
-@using Microsoft.Extensions.Logging
 
 <h3>TuoVakLatIlmoittautumiset</h3>
 
 <div>
     <p>Valitse DanceCore tiedosto</p>
-    <InputFile OnChange="OnInputFileChange" />
+    <InputFile OnChange="OnInputFileChange" AllowedExtensions=".xlsx"/>
 </div>
 
-<Table TItem="VakLatIlmoittautuminen" DataSource="@ilmoittautumiset">
-    <Column @bind-Field="@context.pari"></Column>
+                    
+<Table TItem="VakLatIlmoittautuminen" DataSource="@ilmoittautumiset" RowExpandable="@((record)=>record.Data.ValidationErrors.Count > 0)" >
+    <RowTemplate>
+        <Column @bind-Field="@context.Pari" Sortable></Column>
+        <Column @bind-Field="@context.Edustusseura" Sortable></Column>
+        <Column @bind-Field="@context.Luokka" Sortable></Column>
+        <Column @bind-Field="@context.Sarja"></Column>
+        <ActionColumn>
+            <Space>
+                <SpaceItem><Button OnClick="()=>MuokkaaVakLatIlmoittautuminen(context.RowNumber)">Muokkaa</Button></SpaceItem>
+            </Space>
+        </ActionColumn>
+    </RowTemplate>
+    <ExpandTemplate>
+        <span style="color:red">@context.Data.ValidointiVirheet</span>
+    </ExpandTemplate>
 </Table>
 
-@code {
-    [Inject]
-    protected ILogger<TuoVakLatIlmoittautumiset> logger { get; set; }
-
-    public string fileName { get; set; } = "";
-    //private string fileContent { get; set; } = "";
-
-    private VakLatIlmoittautuminen[] ilmoittautumiset;
-
-    private async Task OnInputFileChange(InputFileChangeEventArgs eventArgs)
-    {
-        fileName = eventArgs.File.Name;
-        Console.WriteLine($"Got input file: {eventArgs.File.Name}");
-        //using var reader = new StreamReader(eventArgs.File.OpenReadStream());
-        //fileContent = await reader.ReadToEndAsync();
-
-        using var sr = new StreamReader(eventArgs.File.OpenReadStream());
-        using var ms = new MemoryStream();
-        await sr.BaseStream.CopyToAsync(ms);
-
-        var reader = new VakLatIlmoittautumisetReader(new MicrosoftLoggingAdapter(logger));
-        reader.ReadRegisteredCouples(ms);
-
-        ilmoittautumiset = new VakLatIlmoittautuminen[reader.DanceCoreIlmoittautumiset.Count];
-        int idx = 0;
-        foreach (var i in reader.DanceCoreIlmoittautumiset)
-        {
-            var ilm = new VakLatIlmoittautuminen();
-            ilm.pari = $"{i.EtunimiM} {i.SukunimiM} - {i.EtunimiN} {i.SukunimiN}";
-            ilmoittautumiset[idx] = ilm;
-            idx++;
-        }
-        StateHasChanged();
-    }
-}
+<VakLatIlmoittautuminenModal @ref="vakLatIlmoittautuminenModal"></VakLatIlmoittautuminenModal>
