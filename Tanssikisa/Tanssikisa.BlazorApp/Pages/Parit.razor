@@ -1,0 +1,19 @@
+﻿@page "/parit" 
+
+<div>
+    <TuoParitModal @ref="TuoParitModal" OnReady="OnParitLoaded"/>
+</div>
+
+<h3>Parit (lukumäärä)</h3>
+<h3>Tiedosto: @filename</h3>
+
+@code {
+    private string filename = "";
+
+    private TuoParitModal TuoParitModal;
+
+    private void OnParitLoaded()
+    {
+        filename = TuoParitModal.fileName;
+    }
+}

@@ -1,0 +1,28 @@
+﻿@page "/dancecore/tuo/ilmoittautumiset"
+
+<h3>TuoVakLatIlmoittautumiset</h3>
+
+<div>
+    <p>Valitse DanceCore tiedosto</p>
+    <InputFile OnChange="OnInputFileChange" AllowedExtensions=".xlsx"/>
+</div>
+
+                    
+<Table TItem="VakLatIlmoittautuminen" DataSource="@ilmoittautumiset" RowExpandable="@((record)=>record.Data.ValidationErrors.Count > 0)" >
+    <RowTemplate>
+        <Column @bind-Field="@context.Pari" Sortable></Column>
+        <Column @bind-Field="@context.Edustusseura" Sortable></Column>
+        <Column @bind-Field="@context.Luokka" Sortable></Column>
+        <Column @bind-Field="@context.Sarja"></Column>
+        <ActionColumn>
+            <Space>
+                <SpaceItem><Button OnClick="()=>MuokkaaVakLatIlmoittautuminen(context.RowNumber)">Muokkaa</Button></SpaceItem>
+            </Space>
+        </ActionColumn>
+    </RowTemplate>
+    <ExpandTemplate>
+        <span style="color:red">@context.Data.ValidointiVirheet</span>
+    </ExpandTemplate>
+</Table>
+
+<VakLatIlmoittautuminenModal @ref="vakLatIlmoittautuminenModal"></VakLatIlmoittautuminenModal>
