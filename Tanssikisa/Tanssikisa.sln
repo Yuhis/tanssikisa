@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30523.141
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tanssikisa.BlazorApp", "Tanssikisa.BlazorApp\Tanssikisa.BlazorApp.csproj", "{4D786C93-5BF6-483E-83A5-9375FE6E7EE9}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.DanceCore", "Integration.DanceCore\Integration.DanceCore.csproj", "{FD4DB819-741F-4868-BD8E-5C5DEB226BED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.DanceCore.Test", "Integration.DanceCore.Test\Integration.DanceCore.Test.csproj", "{277AEC8A-E298-44FD-BB90-A4511183B00B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tanssikisa.Domain", "Tanssikisa.Domain\Tanssikisa.Domain.csproj", "{D0D17A94-D96B-4F68-8052-99097BAC1F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{277AEC8A-E298-44FD-BB90-A4511183B00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D17A94-D96B-4F68-8052-99097BAC1F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D17A94-D96B-4F68-8052-99097BAC1F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D17A94-D96B-4F68-8052-99097BAC1F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D17A94-D96B-4F68-8052-99097BAC1F37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
