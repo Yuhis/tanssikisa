@@ -55,7 +55,7 @@ namespace Integration.DanceCore.Test
 
             // --- Assert -----------------------------------------------------
 
-            Assert.IsTrue(result.IsValid);
+            Assert.That(result.IsValid, Is.True);
         }
 
         [Test]
@@ -71,8 +71,8 @@ namespace Integration.DanceCore.Test
 
             // --- Assert -----------------------------------------------------
 
-            Assert.IsFalse(result.IsValid);
-            Assert.AreEqual("Sarja ei ole oikeassa muodossa", result.Errors.First().ToString());
+            Assert.That(result.IsValid, Is.False);
+            Assert.That(result.Errors.First().ToString(), Is.EqualTo("Sarja ei ole oikeassa muodossa"));
         }
     }
 }
