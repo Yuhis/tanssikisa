@@ -10,13 +10,13 @@
                     
 <Table TItem="VakLatIlmoittautuminen" DataSource="@ilmoittautumiset" RowExpandable="@((record)=>record.Data.ValidationErrors.Count > 0)" >
     <RowTemplate>
-        <Column @bind-Field="@context.Pari" Sortable></Column>
-        <Column @bind-Field="@context.Edustusseura" Sortable></Column>
-        <Column @bind-Field="@context.Luokka" Sortable></Column>
-        <Column @bind-Field="@context.Sarja"></Column>
+        <Column @bind-Field="@context.Data.Pari" Sortable></Column>
+        <Column @bind-Field="@context.Data.Edustusseura" Sortable></Column>
+        <Column @bind-Field="@context.Data.Luokka" Sortable></Column>
+        <Column @bind-Field="@context.Data.Sarja"></Column>
         <ActionColumn>
             <Space>
-                <SpaceItem><Button OnClick="()=>MuokkaaVakLatIlmoittautuminen(context.RowNumber)">Muokkaa</Button></SpaceItem>
+                <SpaceItem><Button OnClick="()=>MuokkaaVakLatIlmoittautuminen(context.Data.RowNumber)">Muokkaa</Button></SpaceItem>
             </Space>
         </ActionColumn>
     </RowTemplate>
