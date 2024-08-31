@@ -1,0 +1,71 @@
+﻿@page "/tuo"
+@rendermode InteractiveServer
+
+<PageTitle>Tuo</PageTitle>
+
+<FluentCard>
+    <FluentLabel Typo="Typography.H1">Tuo parikortisto</FluentLabel>
+
+    <FluentInputFile @ref="@parikortistoBuffer"
+                     AnchorId="ParikortistonLataus"
+                     DragDropZoneVisible="false"
+                     Mode="InputFileMode.Buffer"
+                     Multiple="false"
+                     MaximumFileSize="@(1000 * 1024 * 1024)"
+                     Accept=".xlsx"
+                     OnProgressChange="@OnParikortistoProgressChangeAsync"
+                     OnCompleted="@OnParikortistoCompleted" />
+
+    <FluentProgress Visible="@(parikortistoProgressPercent > 0)" Min="0" Max="100" Value="@parikortistoProgressPercent" />
+    <FluentLabel Alignment="HorizontalAlignment.Center">@parikortistoProgressTitle</FluentLabel>
+    
+    <FluentButton Appearance="@Appearance.Accent" Id="ParikortistonLataus">Valitse parikortiston tiedosto</FluentButton>
+    <FluentButton @onclick="@((e) => parikortistoIsCanceled = true)">Peruuta</FluentButton>
+
+    @if (ParikortistoFiles.Any())
+    {
+        <h4>File(s) uploaded:</h4>
+        <ul>
+            @foreach (var file in ParikortistoFiles)
+            {
+                <li>
+                    @file.Value
+                </li>
+            }
+        </ul>
+    }
+</FluentCard>
+
+<FluentCard>
+    <FluentLabel Typo="Typography.H1">Tuo ilmoittautumiset</FluentLabel>
+
+    <FluentInputFile @ref="@ilmoittautumisetBuffer"
+                     AnchorId="IlmoittautumistenLataus"
+                     DragDropZoneVisible="false"
+                     Mode="InputFileMode.Buffer"
+                     Multiple="false"
+                     MaximumFileSize="@(1000 * 1024 * 1024)"
+                     Accept=".xlsx"
+                     OnProgressChange="@OnIlmoittautumisetProgressChangeAsync"
+                     OnCompleted="@OnIlmoittautumisetCompleted" />
+
+    <FluentProgress Visible="@(ilmoittautumisetProgressPercent > 0)" Min="0" Max="100" Value="@ilmoittautumisetProgressPercent" />
+    <FluentLabel Alignment="HorizontalAlignment.Center">@ilmoittautumisetProgressTitle</FluentLabel>
+
+    <FluentButton Appearance="@Appearance.Accent" Id="IlmoittautumistenLataus">Valitse ilmoittautumisten tiedosto</FluentButton>
+    <FluentButton @onclick="@((e) => ilmoittautumisetIsCanceled = true)">Peruuta</FluentButton>
+
+    @if (IlmoittautumisetFiles.Any())
+    {
+        <h4>Tuodut tiedostot:</h4>
+        <ul>
+            @foreach (var file in IlmoittautumisetFiles)
+            {
+                <li>
+                    @file.Value
+                </li>
+            }
+        </ul>
+    }
+</FluentCard>
+
